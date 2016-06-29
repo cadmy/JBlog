@@ -111,13 +111,12 @@ public class BlogRecordController
 
     @RequestMapping(value = {"/blogentry", "/JBlog/blogentry"}, params = {"blogid"})
     public String blogentry(Map<String, Object> map, @RequestParam(value = "blogid") String blogid) {
-        map.put("recordComment", new Comment());
+        map.put("comment", new Comment());
 
         try
         {
             Long id = Long.valueOf(blogid);
             map.put("blogRecord", blogRecordService.getBlogRecordById(id));
-            map.put("recordCommentList", commentService.commentListForId(id));
         }
         catch (NumberFormatException e)
         {
@@ -125,6 +124,61 @@ public class BlogRecordController
         }
         return "blogentry";
     }
+
+    @RequestMapping(value = {"/refresh_comments", "/JBlog/refresh_comments"},
+                    method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String refreshComments( @RequestParam(value = "blogid") String blogid) {
+        try
+        {
+            Long id = Long.valueOf(blogid);
+            List<Comment> comments = commentService.commentListForBlogRecordId(id);
+            if (!comments.isEmpty())
+            {
+                StringBuilder jsonResult =  new StringBuilder();
+                jsonResult.append("{ \"data\": [");
+                for (Comment comment : comments)
+                {
+                    jsonResult.append("[");
+                    jsonResult.append("\"");
+                    jsonResult.append(comment.getDate().toString());
+                    jsonResult.append("\" ,\"");
+                    jsonResult.append(comment.getUser().getUsername());
+                    jsonResult.append("\" ,\"");
+                    jsonResult.append(comment.getContent()); //TODO cut 160
+                    jsonResult.append("\"],");
+                }
+                jsonResult.deleteCharAt(jsonResult.length()-1);
+                jsonResult.append("]}");
+                return jsonResult.toString();
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            logger.info("Comments are not available");
+        }
+        return "{}";
+    }
+
+    @RequestMapping(value = "/add_comment", params = {"blogid"}, method = RequestMethod.POST)
+    public String addComment(@ModelAttribute("comment") Comment comment,
+                             @RequestParam(value = "blogid") String blogId, BindingResult result) {
+        comment.setUser(userService.getCurrentUser());
+        comment.setDate(new Date());
+        try {
+            Long id = Long.valueOf(blogId);
+            comment.setBlogRecord(blogRecordService.getBlogRecordById(id));
+        }
+        catch (NumberFormatException e)
+        {
+            logger.info("Comments are not available");
+            return "blogentry";
+        }
+        commentService.addComment(comment);
+        logger.info("Comment was added");
+        return "blogentry";
+    }
+
 
     public void getSystemMessage(String message, String style){
         messageStyle = style;

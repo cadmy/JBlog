@@ -24,6 +24,7 @@ public class BlogRecordServiceImpl extends ModelService implements BlogRecordSer
     }
 
     @Override
+    @Transactional
     public List<BlogRecord> blogRecordList() {
         CriteriaQuery<BlogRecord> c = em.getCriteriaBuilder().createQuery(BlogRecord.class);
         c.from(BlogRecord.class);

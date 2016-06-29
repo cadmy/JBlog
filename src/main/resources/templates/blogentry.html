@@ -23,7 +23,7 @@
 
 <div class="container" sec:authorize="isAuthenticated()">
 
-    <table id="balance_table" class="table table-bordered table-striped">
+    <table id="comment_table" class="table table-bordered table-striped">
         <thead>
         <tr>
             <th>Дата</th>
@@ -31,33 +31,12 @@
             <th>Комментарий</th>
         </tr>
         </thead>
-        <thead>
-        <tr>
-
-        </tr>
-        </thead>
-        <tbody>
-        <if th:if="${not #lists.isEmpty(balanceRecordList)}">
-            <tr th:each="balanceRecord : ${balanceRecordList}">
-                <td type="text" th:text="${balanceRecord.date != null} ? ${#calendars.format(balanceRecord.date, 'dd.MM.yyyy')} : null"></td>
-                <td th:text="${balanceRecord.category}"></td>
-                <td th:text="${balanceRecord.title}"></td>
-                <td th:text="${balanceRecord.sign}"></td>
-                <td type="number" th:text="${balanceRecord.value}"></td>
-                <td>
-                    <form action="#" method="post" th:action="@{/delete/__${balanceRecord.id}__}">
-                        <input type="submit" class="btn btn-danger btn-mini" value="Delete"/>
-                    </form>
-                </td>
-            </tr>
-        </if>
-        </tbody>
     </table>
 
-    <form id="add_comment_form" action="#" method="post" th:action="@{/add_comment}" th:object="${recordComment}" class="form-vertical">
+    <form id="add_comment_form" action="#" method="post" th:action="@{/add_comment?blogid=__${blogRecord.id}__}}" th:object="${comment}" class="form-vertical">
         <td>
-            <label path="body">Текст</label>
-            <textarea class="form-control" rows="3" th:field="*{body}"></textarea>
+            <label path="content">Текст</label>
+            <textarea class="form-control" rows="3" th:field="*{content}"></textarea>
         </td>
 
         <td><input type="submit" value="Комментировать" class="btn"/></td>
@@ -78,8 +57,20 @@
 <script th:src="@{/js/parsley.min.js}"></script>
 
 <script type="text/javascript">
-    var formInstance = $('signup_form').parsley();
+    var formInstance = $('comment_table').parsley();
     console.log(field.options.maxlength);
+
+    var table;
+    $(document).ready(function() {
+        table = $('#comment_table').DataTable( {
+            "ajax": '/JBlog/refresh_comments',
+            "sAjaxDataProp": "data"
+        } );
+    } );
+
+    setInterval( function () {
+        table.ajax.reload();
+    }, 5000 );
 </script>
 
 </body>
