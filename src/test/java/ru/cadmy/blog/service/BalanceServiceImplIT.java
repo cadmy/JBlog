@@ -1,4 +1,4 @@
-package ru.cadmy.finance.service;
+package ru.cadmy.blog.service;
 
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -8,7 +8,6 @@ import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.cadmy.blog.configuration.ApplicationContextConfig;
 import ru.cadmy.blog.model.*;
-import ru.cadmy.blog.service.BlogRecordService;
 
 import java.sql.Date;
 
