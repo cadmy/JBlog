@@ -10,13 +10,58 @@
     </link>
 </head>
 <body onload="prettyPrint();">
-<div class="container" sec:authorize="isAuthenticated()">
+<div class="container">
     <h1><p th:text="${blogRecord.title}"></p></h1>
     <p th:text="${blogRecord.body}"></p>
 
     <div th:class="${messageStyle}">
         <p th:text="${systemMessage}" />
     </div>
+
+
+</div>
+
+<div class="container" sec:authorize="isAuthenticated()">
+
+    <table id="balance_table" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Пользователь</th>
+            <th>Комментарий</th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+
+        </tr>
+        </thead>
+        <tbody>
+        <if th:if="${not #lists.isEmpty(balanceRecordList)}">
+            <tr th:each="balanceRecord : ${balanceRecordList}">
+                <td type="text" th:text="${balanceRecord.date != null} ? ${#calendars.format(balanceRecord.date, 'dd.MM.yyyy')} : null"></td>
+                <td th:text="${balanceRecord.category}"></td>
+                <td th:text="${balanceRecord.title}"></td>
+                <td th:text="${balanceRecord.sign}"></td>
+                <td type="number" th:text="${balanceRecord.value}"></td>
+                <td>
+                    <form action="#" method="post" th:action="@{/delete/__${balanceRecord.id}__}">
+                        <input type="submit" class="btn btn-danger btn-mini" value="Delete"/>
+                    </form>
+                </td>
+            </tr>
+        </if>
+        </tbody>
+    </table>
+
+    <form id="add_comment_form" action="#" method="post" th:action="@{/add_comment}" th:object="${recordComment}" class="form-vertical">
+        <td>
+            <label path="body">Текст</label>
+            <textarea class="form-control" rows="3" th:field="*{body}"></textarea>
+        </td>
+
+        <td><input type="submit" value="Комментировать" class="btn"/></td>
+    </form>
 </div>
 
 <div sec:authorize="isAnonymous()" class="container">

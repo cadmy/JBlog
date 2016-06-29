@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "RECORD_COMMENT")
 public
 @Data
-class RecordComment
+class Comment
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,11 +36,11 @@ class RecordComment
     @Column(name = "content", nullable = true, length = 1000)
     private String content;
 
-    public RecordComment(){
+    public Comment(){
 
     }
 
-    public RecordComment(User user, BlogRecord blogRecord, Date date, String content){
+    public Comment(User user, BlogRecord blogRecord, Date date, String content){
         this.user = user;
         this.blogRecord = blogRecord;
         this.date = date;

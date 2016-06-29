@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.cadmy.blog.model.BlogRecord;
+import ru.cadmy.blog.model.*;
 import ru.cadmy.blog.service.*;
 
 import java.util.*;
@@ -28,6 +28,9 @@ public class BlogRecordController
 
     @Autowired
     private BlogRecordService blogRecordService;
+
+    @Autowired
+    CommentService commentService;
 
     @RequestMapping(value = {"/home", "/", "/JBlog"})
     public String index(Map<String, Object> map) {
@@ -108,9 +111,13 @@ public class BlogRecordController
 
     @RequestMapping(value = {"/blogentry", "/JBlog/blogentry"}, params = {"blogid"})
     public String blogentry(Map<String, Object> map, @RequestParam(value = "blogid") String blogid) {
+        map.put("recordComment", new Comment());
+
         try
         {
-            map.put("blogRecord", blogRecordService.getBlogRecordById(Long.valueOf(blogid)));
+            Long id = Long.valueOf(blogid);
+            map.put("blogRecord", blogRecordService.getBlogRecordById(id));
+            map.put("recordCommentList", commentService.commentListForId(id));
         }
         catch (NumberFormatException e)
         {
