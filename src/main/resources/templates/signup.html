@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sign up page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    </link>
+    <link th:href="@{/css/jumbotron.css}" rel="stylesheet">
+    </link>
+</head>
+<body onload="prettyPrint();">
+    <div class="container" sec:authorize="isAnonymous()">
+        <form id="signup_form" action="#" method="post" th:action="@{/add_person}" th:object="${user}" class="form-vertical">
+            <div class="form-group row">
+                <label path="email">Email</label>
+                <input required = "true" data-parsley-maxlength="500" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" th:field="*{email}" />
+            </div>
+
+            <div class="form-group row">
+                <label path="username">Логин</label>
+                <input required = "true" data-parsley-maxlength="500" type="text" th:field="*{username}" />
+            </div>
+
+            <div class="form-group row">
+                <label path="password">Пароль</label>
+                <input required = "true" data-parsley-maxlength="500" type="password" th:field="*{password}" />
+            </div>
+
+            <div class="form-group row">
+                <label path="lastName">Фамилия</label>
+                <input required = "true" data-parsley-maxlength="500" type="text" th:field="*{lastName}" />
+            </div>
+
+            <div class="form-group row">
+                <label path="firstName">Имя</label>
+                <input required = "true" data-parsley-maxlength="500" type="text" th:field="*{firstName}" />
+            </div>
+
+
+            <div class="form-group row">
+                <label path="middleName">Отчество</label>
+                <input required = "true" data-parsley-maxlength="500" type="text" th:field="*{middleName}" />
+            </div>
+            <div class="form-group row">
+                <select th:field="*{role}">
+                    <option value="GUEST">GUEST</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Зарегистрироваться" class="btn btn-primary btn-large" />
+        </form>
+
+        <div th:class="${messageStyle}">
+            <p th:text="${systemMessage}" />
+        </div>
+    </div>
+
+    <div sec:authorize="isAuthenticated()" class="container">
+        <p th:text="'Welcome, ' + ${user.username}"></p>
+    </div>
+
+    <div class="container">
+        <a href="/JBlog/" class="btn">Главная</a>
+    </div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/prettify.min.js}"></script>
+<script th:src="@{/js/jquery-3.0.0.min.js}"></script>
+<script th:src="@{/js/parsley.min.js}"></script>
+
+<script type="text/javascript">
+    var formInstance = $('signup_form').parsley();
+    console.log(field.options.maxlength);
+</script>
+
+</body>
+</html>

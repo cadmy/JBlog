@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Запись блога</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    </link>
+    <link th:href="@{/css/jumbotron.css}" rel="stylesheet">
+    </link>
+</head>
+<body onload="prettyPrint();">
+<div class="container" sec:authorize="isAuthenticated()">
+    <h1><p th:text="${blogRecord.title}"></p></h1>
+    <p th:text="${blogRecord.body}"></p>
+
+    <div th:class="${messageStyle}">
+        <p th:text="${systemMessage}" />
+    </div>
+</div>
+
+<div sec:authorize="isAnonymous()" class="container">
+    <p>У вас недостачно прав для создания сообщения</p>
+</div>
+
+<div class="container">
+    <a href="/JBlog/" class="btn">Главная</a>
+</div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/prettify.min.js}"></script>
+<script th:src="@{/js/jquery-3.0.0.min.js}"></script>
+<script th:src="@{/js/parsley.min.js}"></script>
+
+<script type="text/javascript">
+    var formInstance = $('signup_form').parsley();
+    console.log(field.options.maxlength);
+</script>
+
+</body>
+</html>
