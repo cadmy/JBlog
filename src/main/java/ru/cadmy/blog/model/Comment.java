@@ -7,9 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Cadmy on 21.03.2016.
- */
 @Entity
 @Table(name = "RECORD_COMMENT")
 public

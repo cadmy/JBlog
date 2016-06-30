@@ -10,9 +10,6 @@ import javax.persistence.criteria.*;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Cadmy on 22.03.2016.
- */
 @Service
 public class BlogRecordServiceImpl extends ModelService implements BlogRecordService
 {

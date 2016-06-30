@@ -7,9 +7,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-/**
- * Created by Cadmy on 27.04.2016.
- */
 @Configuration
 @Profile("dev")
 public class H2Configuration implements DataSourceConfiguration {

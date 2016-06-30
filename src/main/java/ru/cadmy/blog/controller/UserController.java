@@ -11,9 +11,6 @@ import ru.cadmy.blog.service.*;
 import javax.validation.Valid;
 import java.util.Map;
 
-/**
- * Created by Cadmy on 27.04.2016.
- */
 @Controller
 public class UserController {
 

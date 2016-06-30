@@ -14,10 +14,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.criteria.*;
 import java.util.*;
 
-/**
- * Created by Cadmy on 10.03.2016.
- */
-
 @Service("userServiceImpl")
 public class UserServiceImpl extends ModelService implements UserService, UserDetailsService {
 

@@ -15,14 +15,10 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-
-/**
- * Created by Cadmy on 02.06.2016.
- */
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration(classes = ApplicationContextConfig.class)
 @ActiveProfiles("dev")
-public class BalanceServiceImplIT {
+public class BlogRecordServiceImplIT {
 
     @Autowired
     BlogRecordService balanceService;

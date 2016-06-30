@@ -13,10 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 
-
-/**
- * Created by Cadmy on 11.03.2016.
- */
 @Configuration
 @ComponentScan("ru.cadmy.blog")
 @EnableTransactionManagement

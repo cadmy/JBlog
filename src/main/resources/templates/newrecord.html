@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
     <title>Новое сообщение</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -17,7 +17,7 @@
             <label path="date">Дата ("YYYY-MM-DD")</label>
             <input type="date" required = "true" th:field="*{date}" placeholder="YYYY-MM-DD" data-date-format="YYYY-MM-DD"/>
             <label path="title">Заголовок</label>
-            <input data-parsley-maxlength="500" required = "true"  type="text" th:field="*{title}" />
+            <input data-parsley-maxlength="500" size="50" required = "true"  type="text" th:field="*{title}" />
         </div>
 
         <div class="form-group row">

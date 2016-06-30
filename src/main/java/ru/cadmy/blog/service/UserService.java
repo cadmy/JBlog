@@ -1,9 +1,5 @@
 package ru.cadmy.blog.service;
 
-/**
- * Created by Cadmy on 10.03.2016.
- */
-
 import ru.cadmy.blog.model.User;
 
 import java.util.List;

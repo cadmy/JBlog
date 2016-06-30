@@ -4,9 +4,6 @@ import ru.cadmy.blog.model.*;
 
 import java.util.*;
 
-/**
- * Created by Cadmy on 22.03.2016.
- */
 public interface BlogRecordService
 {
     void addBlogRecord(BlogRecord blogRecord);

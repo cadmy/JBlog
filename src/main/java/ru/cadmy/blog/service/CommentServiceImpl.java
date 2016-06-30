@@ -8,9 +8,6 @@ import ru.cadmy.blog.model.*;
 import javax.persistence.criteria.*;
 import java.util.List;
 
-/**
- * Created by Cadmy on 29.06.2016.
- */
 @Service
 public class CommentServiceImpl extends ModelService implements CommentService {
 

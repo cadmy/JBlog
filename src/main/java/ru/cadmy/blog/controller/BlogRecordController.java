@@ -12,9 +12,6 @@ import java.util.*;
 
 import static ru.cadmy.blog.controller.UserController.*;
 
-/**
- * Created by Cadmy on 27.04.2016.
- */
 @Controller
 public class BlogRecordController
 {
