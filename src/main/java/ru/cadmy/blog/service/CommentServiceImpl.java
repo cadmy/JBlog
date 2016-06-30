@@ -3,16 +3,10 @@ package ru.cadmy.blog.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.cadmy.blog.model.*;
 
+import javax.persistence.criteria.*;
 import java.util.List;
-
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
-import ru.cadmy.blog.model.BlogRecord;
-import ru.cadmy.blog.model.Comment;
 
 /**
  * Created by Cadmy on 29.06.2016.
@@ -35,8 +29,8 @@ public class CommentServiceImpl extends ModelService implements CommentService {
         BlogRecord blogRecord = blogRecordService.getBlogRecordById(blogid);
         if (blogRecord != null) {
             CriteriaQuery<Comment> criteriaQuery = em.getCriteriaBuilder().createQuery(Comment.class);
-            Root<Comment> balanceRequest = criteriaQuery.from(Comment.class);
-            Expression<String> exp = balanceRequest.get("blog_record");
+            Root<Comment> commentRequest = criteriaQuery.from(Comment.class);
+            Expression<String> exp = commentRequest.get("blogRecord");
             Predicate predicate = exp.in(blogRecord);
             criteriaQuery.where(predicate);
             return em.createQuery(criteriaQuery).getResultList();

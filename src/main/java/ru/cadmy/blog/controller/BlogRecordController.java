@@ -160,23 +160,24 @@ public class BlogRecordController
         return "{}";
     }
 
-    @RequestMapping(value = "/add_comment", params = {"blogid"}, method = RequestMethod.POST)
+    @RequestMapping(value = "/add_comment", method = RequestMethod.POST)
     public String addComment(@ModelAttribute("comment") Comment comment,
-                             @RequestParam(value = "blogid") String blogId, BindingResult result) {
+                             @RequestParam(value = "blogid") String blogid, BindingResult result) {
         comment.setUser(userService.getCurrentUser());
         comment.setDate(new Date());
+        Long id;
         try {
-            Long id = Long.valueOf(blogId);
+            id = Long.valueOf(blogid);
             comment.setBlogRecord(blogRecordService.getBlogRecordById(id));
         }
         catch (NumberFormatException e)
         {
             logger.info("Comments are not available");
-            return "blogentry";
+            return "redirect:/JBlog/error";
         }
         commentService.addComment(comment);
         logger.info("Comment was added");
-        return "blogentry";
+        return "redirect:/JBlog/blogentry?blogid="+id;
     }
 
 
