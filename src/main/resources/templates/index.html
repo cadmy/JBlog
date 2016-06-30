@@ -94,27 +94,30 @@
 </div>
 
 <div sec:authorize="isAuthenticated()" class="container">
-        <div class="tab-pane" id="overall">
-            <div class="container">
-                <div class="row">
-                    <div class="span8 offset2">
-                        <h3>Новости</h3>
-                        <table id="blog_table" class="table table-bordered table-striped" style="width: 100%">
-                            <thead>
-                                <tr>
-                                    <th>Заголовок</th>
-                                    <th>Текст</th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-                            <a href="/JBlog/newrecord" class="btn">Добавить запись</a>
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="span8 offset2">
+                <h3>Новости</h3>
+                <table id="blog_table" class="table table-bordered table-striped" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Заголовок</th>
+                            <th>Текст</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span12" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <a href="/JBlog/newrecord" class="btn btn-primary btn-large">Добавить запись</a>
+            </div>
+        </div>
+    </div>
 </div>
+
 <script th:src="@{/js/jquery-3.0.0.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/prettify.min.js}"></script>
@@ -124,7 +127,11 @@
     $(document).ready(function() {
         table = $('#blog_table').DataTable( {
             "ajax": '/JBlog/refresh',
-            "sAjaxDataProp": "data"
+            "sAjaxDataProp": "data",
+            "info":     false,
+            "columnDefs": [
+                { "width": "25%", "targets": 0 }
+            ]
         } );
     } );
 

@@ -92,7 +92,11 @@ public class BlogRecordController
                 jsonResult.append("\"");
                 jsonResult.append("<a href=\'/JBlog/blogentry?blogid=" + blogRecord.getId() + "\'>" + blogRecord.getTitle() + "</a>");
                 jsonResult.append("\" ,\"");
-                jsonResult.append(blogRecord.getBody()); //TODO cut 160
+                String body = blogRecord.getBody();
+                if (body.length() > 160){
+                    body = body.substring(0, 159);
+                }
+                jsonResult.append(body);
                 jsonResult.append("\"],");
             }
             jsonResult.deleteCharAt(jsonResult.length()-1);
