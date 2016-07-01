@@ -46,7 +46,7 @@ public class UserController {
             case SUCCESS:
                 logger.info("User ".join(user.getUsername()).join(" was created"));
                 blogRecordController.getSystemMessage("Пользователь успешно создан", ALERT_SUCCESS_STYLE);
-                return "redirect:/";
+                return "redirect:/JBlog/";
             case USERNAME_EXISTS:
                 logger.info("Username ".join(user.getUsername()).join(" already exists"));
                 messageStyle = ALERT_DANGER_STYLE;

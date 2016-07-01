@@ -146,7 +146,7 @@ public class BlogRecordController
                     jsonResult.append("\" ,\"");
                     jsonResult.append(comment.getUser().getUsername());
                     jsonResult.append("\" ,\"");
-                    jsonResult.append(comment.getContent()); //TODO cut 160
+                    jsonResult.append(comment.getContent());
                     jsonResult.append("\"],");
                 }
                 jsonResult.deleteCharAt(jsonResult.length()-1);
@@ -173,7 +173,7 @@ public class BlogRecordController
         }
         catch (NumberFormatException e)
         {
-            logger.info("Comments are not available");
+            logger.info("Error while adding comment");
             return "redirect:/JBlog/error";
         }
         commentService.addComment(comment);

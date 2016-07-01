@@ -18,12 +18,6 @@ public interface BlogRecordService
 
     List<BlogRecord> blogRecordList(User user, Date dateFrom, Date dateTo);
 
-    List<BlogRecord> blogRecordList(User user, String category);
-
-    List<BlogRecord> blogRecordList(User user, Date date, String category);
-
-    List<BlogRecord> blogRecordList(User user, Date dateFrom, Date dateTo, String category);
-
     BlogRecord getBlogRecordById(Long id);
 
     void removeBlogRecord(Long balanceRecordId);

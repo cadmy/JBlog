@@ -59,21 +59,6 @@ public class BlogRecordServiceImpl extends ModelService implements BlogRecordSer
     }
 
     @Override
-    public List<BlogRecord> blogRecordList(User user, String category) {
-        return null;
-    }
-
-    @Override
-    public List<BlogRecord> blogRecordList(User user, Date date, String category) {
-        return null;
-    }
-
-    @Override
-    public List<BlogRecord> blogRecordList(User user, Date dateFrom, Date dateTo, String category) {
-        return null;
-    }
-
-    @Override
     public BlogRecord getBlogRecordById(Long id) {
         return em.find(BlogRecord.class, id);
     }
