@@ -1,14 +1,17 @@
 package ru.cadmy.blog.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-public
 @Data
-class User {
+@ToString
+@EqualsAndHashCode
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

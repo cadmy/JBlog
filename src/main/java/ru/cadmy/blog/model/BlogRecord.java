@@ -1,6 +1,6 @@
 package ru.cadmy.blog.model;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,9 +9,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "BLOG")
-public
 @Data
-class BlogRecord
+@ToString
+@EqualsAndHashCode
+public class BlogRecord
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
